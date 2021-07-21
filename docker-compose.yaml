@@ -19,8 +19,8 @@ services:
             - app_network
 
     app:
-        build: ./.docker/php
         container_name: app
+        build: ./.docker/php
         tty: true
         ports:
             - "9000:9000"
@@ -42,6 +42,14 @@ services:
         depends_on:
             - app
         networks:
+            - app_network
+    
+    redis:
+        container_name: redis
+        image: redis:latest
+        ports: 
+            - "6379:6379"
+        networks: 
             - app_network
 
 networks:
